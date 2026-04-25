@@ -27,34 +27,19 @@
     <link rel="stylesheet" href="~/NexEraTech_Portfolio.styles.css" asp-append-version="true" />
     <style>
         /* Header/logo tweaks to improve wordmark and icon sizing */
-        .navbar-brand.logo { display: inline-flex; align-items: center; gap: 10px; }
-        .navbar-logo { width: 28px; height: 28px; object-fit: contain; margin-right: 8px; }
+        .navbar-brand.logo { display: inline-flex; align-items: center; gap: 10px; padding: 0 6px; }
+        .navbar-logo, .main-logo-icon { width: 36px !important; height: 36px !important; object-fit: contain !important; margin-right: 8px; display: block; border-radius: 0 !important; background: transparent !important; vertical-align: middle; }
         .navbar-brand.logo span { font-family: 'Poppins', 'Segoe UI', sans-serif; font-weight: 700; font-size: 1.15rem; color: #111; }
-
-        /* Privacy page: larger logo & bolder wordmark for better visual presence */
-        body.privacy-page .navbar-logo,
-        body.privacy-page .main-logo-icon { width: 44px; height: 44px; margin-right: 12px; }
-        body.privacy-page .navbar-brand.logo span { font-size: 1.6rem; font-weight: 800; }
-
-        @@media (max-width: 576px) {
-            body.privacy-page .navbar-logo { width: 36px; height: 36px; }
-            body.privacy-page .navbar-brand.logo span { font-size: 1.1rem; }
-        }
         .logo-icon { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 8px; padding: 0; box-shadow: 0 6px 18px rgba(2,6,23,0.45); background: transparent; overflow: visible !important; position: relative; z-index: 1302; margin-top: 6px; }
-        /* Ensure logo image is not clipped — force contain and no rounding so full mark shows */
-        .logo-icon img, .main-logo-icon { display: block; width: 36px !important; height: 36px !important; object-fit: contain !important; border-radius: 0 !important; overflow: visible !important; background: transparent !important; vertical-align: middle; margin: 0; }
         .logo-icon svg { display: block; width: 36px; height: 36px; margin-top: 0; line-height: 1; }
-
-        /* Ensure parent navbar elements don't clip the logo and center content */
         .navbar, .navbar-brand, .navbar.site-header, .navbar .container-fluid { overflow: visible !important; }
         .navbar-brand, .navbar { position: relative; z-index: 1301; }
         .navbar.site-header .container-fluid { display: flex; align-items: center; }
         .navbar.site-header { min-height: 68px; padding-top: 6px; }
-        .navbar-brand.logo { padding: 0 6px; }
     </style>
 </head>
 @{
-    var _nexeraPng = Url.Content("~/images/favicon.png");
+    var _nexeraPng = Url.Content("~/Images/favicon.png");
     var _nexeraSvg = Url.Content("~/Images/nexera-logo.svg");
     var _nexeraMark = Url.Content("~/Images/nexera-mark.svg");
     var isPrivacy = string.Equals(ViewContext.RouteData.Values["action"]?.ToString(), "Privacy", StringComparison.OrdinalIgnoreCase);
@@ -79,6 +64,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Terms">Terms</a>
                         </li>
                     </ul>
                 </div>
