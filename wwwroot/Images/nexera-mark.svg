@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" role="img" aria-label="NexEra mark">
+  <defs>
+    <linearGradient id="lg-mark" x1="0" x2="1">
+      <stop offset="0%" stop-color="#5DAAFF"/>
+      <stop offset="100%" stop-color="#8B5CFF"/>
+    </linearGradient>
+  </defs>
+  <g fill="url(#lg-mark)">
+    <path d="M0 8 C6 -2 18 -2 24 8 C18 18 6 18 0 8 Z" fill="url(#lg-mark)" />
+    <circle cx="34" cy="34" r="6" fill="url(#lg-mark)" />
+  </g>
+</svg>
