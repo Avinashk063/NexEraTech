@@ -1,0 +1,341 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS44MGQDCK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-LS44MGQDCK');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexEra Tech | Startup UI Engineering</title>
+    <link rel="icon" type="image/png" href="@(Url.Content("~/Images/favicon.png"))" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+@*     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet"> *@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="@(Url.Content("~/css/style.css"))" />
+</head>
+<body id="page-top">
+    <div class="page-glow glow-top"></div>
+    <div class="page-glow glow-bottom"></div>
+
+    <header class="site-header">
+        <div class="container nav-wrap">
+            <a class="logo" href="#home">
+                <img src="@(Url.Content("~/Images/favicon.png"))" alt="NexEra Tech logo" class="main-logo-icon" />
+                <span>NexEra Tech</span>
+            </a>
+            <button class="mobile-toggle" aria-label="Toggle navigation" type="button" aria-controls="main-nav" aria-expanded="false">
+                <span class="hamburger" aria-hidden="true"></span>
+            </button>
+            <nav id="main-nav" role="navigation">
+                <ul>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#why-choose-us">Why Choose Us</a></li>
+                    <li><a href="#about-me">About</a></li>
+                    <li><a href="#free-consultation">Contact</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-backdrop" aria-hidden="true"></div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-bg-grid"></div>
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <p class="eyebrow">NexEra Tech · Design + Engineering</p>
+                    <h1>We build <span class="highlight">premium startup websites</span> that convert visitors into customers.</h1>
+                    <p class="hero-subtext">From strategic UX to scalable .NET-powered experiences, we launch products that look world-class and perform like real SaaS platforms.</p>
+                    <div class="hero-cta-group">
+                        <a href="#free-consultation" class="btn">Start a Project</a>
+                        <a href="#projects" class="btn ghost">View Work</a>
+                    </div>
+                    <div class="hero-trust-row">
+                        <span><i class="fas fa-rocket"></i> Fast Launch Cycles</span>
+                        <span><i class="fas fa-bolt"></i> High Performance UI</span>
+                        <span><i class="fas fa-cloud"></i> Cloud-ready Delivery</span>
+                    </div>
+                </div>
+                <div class="hero-panel">
+                    <div class="panel-card">
+                        <p class="panel-kicker">Active sprint</p>
+                        <h3>Funded startup landing page revamp</h3>
+                        <p>Improved conversion-focused UX with stronger hierarchy, mobile polish, and interactive visuals.</p>
+                        <div class="panel-metrics">
+                            <div><strong>+41%</strong><span>Engagement</span></div>
+                            <div><strong>2.3s</strong><span>Avg Load Time</span></div>
+                            <div><strong>99.9%</strong><span>Uptime</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="projects" id="projects">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <p class="eyebrow">Selected Work</p>
+                        <h2>Startup-ready projects with measurable impact</h2>
+                    </div>
+                </div>
+                <div class="project-grid">
+                    @* <article class="project-card">
+                        <div class="project-thumb" style="background-image: url('@Url.Content("~/Images/taskmaster.png")'); background-size: cover; background-position: center;">
+                            <div class="thumb-dim" aria-hidden="true"></div>
+                            <div class="thumb-overlay">AI Assistant</div>
+                        </div>
+                        <div class="project-details">
+                            <h3>Taskmaster AI</h3>
+                            <p class="project-desc">AI-powered productivity assistant offering task automation, smart reminders and goal-driven workflows — showcased on a clean landing experience.</p>
+                            <div class="badge-row">
+                                <span>Next.js</span><span>AI</span><span>Vercel</span>
+                            </div>
+                            <a href="https://taskmasterai.vercel.app/landing" class="btn live-link" target="_blank" rel="noopener noreferrer">Visit Site</a>
+                        </div>
+                    </article> *@
+                    <article class="project-card">
+                        <div class="project-thumb thumb-two" style="background-image: url('@Url.Content("~/Images/SmartExam.png")'); background-size: cover; background-position: center;">
+                            <div class="thumb-dim" aria-hidden="true"></div>
+                            <div class="thumb-overlay">Assessment Platform</div>
+                        </div>
+                        <div class="project-details">
+                            <h3>SmartExam</h3>
+                            <p class="project-desc">Online assessment platform for tracking progress, secure sign-in, collaboration, and analytics — built for modern education workflows.</p>
+                            <div class="badge-row">
+                                <span>Razor</span><span>ASP.NET Identity</span><span>Analytics</span><span>Azure</span>
+                            </div>
+                            <a href="https://smartexam-hpbybhhubqaagzhz.malaysiawest-01.azurewebsites.net" class="btn live-link" target="_blank" rel="noopener noreferrer">Visit Site</a>
+                        </div>
+                    </article>
+                    <article class="project-card">
+                        <div class="project-thumb thumb-three" style="background-image: url(' @Url.Content("~/Images/dnasoftech.png")'); background-size: cover; background-position: center;">
+                            <div class="thumb-dim" aria-hidden="true"></div>
+                            <div class="thumb-overlay">Solar Solutions</div>
+                        </div>
+                        <div class="project-details">
+                            <h3>DNA Softech &amp; Energy</h3>
+                            <p class="project-desc">Responsive site for a local solar installer with a live ROI calculator, subsidy guidance, and lead capture to drive free site-survey bookings.</p>
+                            <div class="badge-row">
+                                <span>HTML/CSS</span><span>JavaScript</span><span>ROI Calculator</span><span>WhatsApp</span>
+                            </div>
+                                <a href="https://dnasoftech.com/" class="btn live-link" target="_blank" rel="noopener noreferrer">Visit Site</a>
+                        </div>
+                    </article>
+                    <article class="project-card">
+                        <div class="project-thumb" style="background-image: url('@Url.Content("~/Images/RDJ.png")'); background-size: cover; background-position: center;">
+                            <div class="thumb-dim" aria-hidden="true"></div>
+                            <div class="thumb-overlay">Portfolio</div>
+                        </div>
+                        <div class="project-details">
+                            <h3>Personal Portfolio</h3>
+                            <p class="project-desc">Personal portfolio showcasing projects, case studies and UI experiments.</p>
+                            <div class="badge-row">
+                                <span>HTML</span><span>CSS</span><span>Design</span>
+                            </div>
+                            <a href="https://avinova.in/" class="btn live-link" target="_blank" rel="noopener noreferrer">Visit Site</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="skills" id="skills">
+            <div class="container">
+                <div class="section-header single">
+                    <div>
+                        <p class="eyebrow">Capabilities</p>
+                        <h2>Full product execution from concept to cloud</h2>
+                    </div>
+                </div>
+                <div class="skill-groups">
+                    <div class="skill-group-card">
+                        <h3><i class="fas fa-laptop-code"></i> Frontend</h3>
+                        <p>Pixel-perfect interfaces with strong motion, accessibility, and design consistency.</p>
+                        <br />
+                        <div class="badge-row"><span>HTML/CSS</span><span>JavaScript</span><span>React</span><span>UI Animation</span></div>
+                    </div>
+                    <div class="skill-group-card">
+                        <h3><i class="fas fa-server"></i> Backend</h3>
+                        <p>Secure and maintainable APIs designed for real-world startup scale and speed.</p>
+                        <br />
+                        <div class="badge-row"><span>.NET</span><span>REST APIs</span><span>MySQL</span><span>Auth</span></div>
+                    </div>
+                    <div class="skill-group-card">
+                        <h3><i class="fas fa-cloud"></i> Cloud & DevOps</h3>
+                        <p>Deploy with confidence using modern cloud workflows and resilient delivery pipelines.</p>
+                        <br />
+                        <div class="badge-row"><span>Azure</span><span>Docker</span><span>CI/CD</span><span>Monitoring</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="why-choose-us" id="why-choose-us">
+            <div class="container">
+                <div class="section-header single">
+                    <div>
+                        <p class="eyebrow">Why Choose Us</p>
+                        <h2>The NexEra Tech Difference</h2>
+                    </div>
+                </div>
+                <div class="why-choose-grid">
+                    <div class="why-choose-card">
+                        <div class="why-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <h3>Lightning-Fast Execution</h3>
+                        <p>We compress project timelines without cutting corners. Ship your MVP in weeks, not months.</p>
+                    </div>
+                    <div class="why-choose-card">
+                        <div class="why-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Proven Conversion Impact</h3>
+                        <p>Our designs don't just look good—they drive measurable business results. Average +35% improvement in key metrics.</p>
+                    </div>
+                    <div class="why-choose-card">
+                        <div class="why-icon">
+                            <i class="fas fa-sliders-h"></i>
+                        </div>
+                        <h3>Full-Stack Expertise</h3>
+                        <p>Design, frontend, backend, DevOps—we handle the complete product journey without handoffs.</p>
+                    </div>
+                    <div class="why-choose-card">
+                        <div class="why-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Built for Scale</h3>
+                        <p>Architected for growth from day one. Your site won't break when you go viral or scale to millions of users.</p>
+                    </div>
+                    <div class="why-choose-card">
+                        <div class="why-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>True Partnership Model</h3>
+                        <p>We're invested in your success. Direct access to our leadership team and transparent communication throughout.</p>
+                    </div>
+                    <div class="why-choose-card">
+                        <div class="why-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3>Continuous Optimization</h3>
+                        <p>Post-launch support with performance monitoring, analytics integration, and ongoing improvements.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-me" id="about-me">
+            <div class="container about-content">
+                <div class="about-visual">
+                    <div class="about-avatar">
+                        <!-- Studio mockup: use a background image so we can crop, add glow and a device frame -->
+                        <div class="studio-mockup" role="img" aria-label="NexEra Tech Studio" style="background-image: url('@Url.Content("~/Images/community-social-media-people.png")');">
+                            <div class="studio-overlay"></div>
+                            <div class="studio-frame"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <p class="eyebrow">About NexEra Tech</p>
+                    <h2>We partner with founders to design products people trust.</h2>
+                    <p>NexEra Tech is a product-focused startup studio helping teams build modern digital experiences with clarity, speed, and measurable outcomes.</p>
+                    <ul class="strength-list">
+                        <li>Rapid design-to-development execution</li>
+                        <li>Scalable architecture for long-term growth</li>
+                        <li>Performance and accessibility by default</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="free-consultation" id="free-consultation">
+            <div class="consultation-bg"></div>
+            <div class="container consultation-content">
+                <div class="consultation-text">
+                    <h2>Get Your Free Consultation</h2>
+                    <p>Not sure if NexEra Tech is the right fit? Let’s discuss your ideas—completely free. We'll audit your current product, identify growth opportunities, and give you an honest assessment.</p>
+                    <ul class="consultation-benefits">
+                        <li><i class="fas fa-check"></i> No commitment required</li>
+                        <li><i class="fas fa-check"></i> Custom recommendations tailored to your goals</li>
+                        <li><i class="fas fa-check"></i> Direct conversation with our founders</li>
+                        <li><i class="fas fa-check"></i> Actionable roadmap to take home</li>
+                    </ul>
+                </div>
+                <div class="consultation-cta">
+                    <div class="consultation-card">
+                        <h3>Book Your Free Session Now</h3>
+                        <p class="highlight-text">Let’s discuss your ideas and next steps</p>
+                        <a href="@Url.Action("BookAppointment", "Home")" class="btn btn-large"><i class="fas fa-calendar"></i> Book Appointment</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials" id="testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <p class="eyebrow">Testimonials</p>
+                        <h2>What founders say about working with us</h2>
+                    </div>
+                </div>
+
+                <div class="testimonials-grid">
+                    <article class="testimonial-card">
+                        <p class="testimonial-quote">“Working with NexEra Tech reduced our time-to-market and increased conversion rates. Their team delivered a beautiful, high-performing product that customers love.”</p>
+                        <div class="testimonial-meta">
+                            <div class="testimonial-avatar placeholder" aria-hidden="true"><i class="fas fa-user"></i></div>
+                            <div>
+                                <strong>Avinash</strong>
+                                <span class="testimonial-role">Founder, DNASoftech</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="testimonial-card">
+                        <p class="testimonial-quote">“Their design and engineering partnership was exactly what we needed. Fast iterations, clear communication, and measurable lift in key metrics.”</p>
+                        <div class="testimonial-meta">
+                            <div class="testimonial-avatar placeholder" aria-hidden="true"><i class="fas fa-user"></i></div>
+                            <div>
+                                <strong>Sofia</strong>
+                                <span class="testimonial-role">Head of Product, SmartExam</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="testimonial-card">
+                        <p class="testimonial-quote">“NexEra Tech helped us turn a vague idea into a polished MVP. Their attention to UX and performance was a major differentiator.”</p>
+                        <div class="testimonial-meta">
+                            <div class="testimonial-avatar placeholder" aria-hidden="true"><i class="fas fa-user"></i></div>
+                            <div>
+                                <strong>Baldev Aggarwal</strong>
+                                <span class="testimonial-role">Founder, TaskMaster AI</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <partial name="_Footer" />
+
+    <script src="@(Url.Content("~/js/script.js"))"></script>
+</body>
+</html>

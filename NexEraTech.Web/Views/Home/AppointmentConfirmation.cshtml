@@ -1,0 +1,122 @@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS44MGQDCK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);} 
+      gtag('js', new Date());
+
+      gtag('config', 'G-LS44MGQDCK');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Confirmed | NexEra Tech</title>
+    <link rel="icon" type="image/png" href="@(Url.Content("~/Images/favicon.png"))" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="@(Url.Content("~/css/style.css"))" />
+    <style>
+        .confirmation-page { min-height: 100vh; display: flex; flex-direction: column; }
+        .confirmation-container { flex: 1; display: flex; align-items: center; justify-content: center; padding: 60px 24px; }
+        .confirmation-wrapper { width: 100%; max-width: 600px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+        .success-icon { 
+            width: 90px; 
+            height: 90px; 
+            background: linear-gradient(135deg, rgba(79, 140, 255, 0.25), rgba(139, 92, 255, 0.25)); 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin-bottom: 40px; 
+            font-size: 2.8rem; 
+            color: var(--accent-blue);
+            flex-shrink: 0;
+        }
+        .confirmation-title { 
+            font-size: 2.2rem; 
+            margin-bottom: 20px; 
+            color: var(--text-primary);
+            line-height: 1.2;
+            font-weight: 700;
+        }
+        .confirmation-text { font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 30px; line-height: 1.7; }
+        .next-steps { background: rgba(18, 24, 38, 0.8); border: 1px solid var(--border); border-radius: 15px; padding: 24px; margin: 30px 0; text-align: left; }
+        .next-steps h3 { font-size: 1.1rem; margin-bottom: 16px; color: var(--text-primary); }
+        .next-steps ol { margin-left: 20px; }
+        .next-steps li { margin-bottom: 12px; color: var(--text-secondary); }
+        .next-steps li strong { color: var(--text-primary); }
+        .action-buttons { display: flex; flex-direction: column; gap: 12px; margin-top: 30px; width: 100%; }
+        .action-buttons a { display: inline-block; padding: 14px 24px; text-decoration: none; border-radius: 10px; font-weight: 600; }
+        @@media (max-width: 600px) {
+            .confirmation-container { padding: 30px 16px; }
+            .confirmation-title { font-size: 1.6rem; }
+            .confirmation-text { font-size: 0.95rem; }
+            .success-icon { width: 80px; height: 80px; margin-bottom: 30px; font-size: 2.3rem; }
+        }
+    </style>
+</head>
+<body id="page-top">
+    <div class="page-glow glow-top"></div>
+    <div class="page-glow glow-bottom"></div>
+
+    <header class="site-header">
+        <div class="container nav-wrap">
+            <a class="logo" href="@Url.Action("Index", "Home")">
+                <img src="@(Url.Content("~/Images/favicon.png"))" alt="NexEra Tech logo" class="main-logo-icon" />
+                <span>NexEra Tech</span>
+            </a>
+            <a href="@Url.Action("Index", "Home")" class="btn ghost" style="padding: 10px 16px; font-size: 0.9rem;">← Back to Home</a>
+        </div>
+    </header>
+
+    <main class="confirmation-page">
+        <div class="confirmation-container">
+            <div class="confirmation-wrapper">
+                <div class="success-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+
+                <h1 class="confirmation-title">Appointment Request Received!</h1>
+
+                <p class="confirmation-text">
+                    Thank you for booking a consultation with NexEra Tech. We've received your request and our team is reviewing your project details.
+                </p>
+
+                @if (TempData["ConsultationDate"] != null)
+                {
+                    <p class="confirmation-text"><strong>Your scheduled appointment:</strong> @TempData["ConsultationDate"]</p>
+                }
+
+                <div class="next-steps">
+                    <h3>What Happens Next?</h3>
+                    <ol>
+                        <li><strong>24-hour confirmation:</strong> We'll contact you via email or phone to confirm your appointment and discuss your project specifics.</li>
+                        <li><strong>Pre-call prep:</strong> You'll receive a brief questionnaire to help us prepare for your consultation.</li>
+                        <li><strong>Your free session:</strong> Our team will join the call to discuss your goals, challenges, and provide actionable recommendations.</li>
+                        <li><strong>Custom proposal:</strong> If it's a fit, we'll follow up with a tailored proposal and next steps.</li>
+                    </ol>
+                </div>
+
+                <p class="confirmation-text">
+                    <strong>Don't see a confirmation email?</strong> Check your spam folder or contact us at <a href="mailto:work.nexeratech@gmail.com" style="color: var(--accent-blue); text-decoration: none;">work.nexeratech@gmail.com</a>
+                </p>
+
+                <div class="action-buttons">
+                    <a href="@Url.Action("Index", "Home")" class="btn" style="text-decoration: none;">
+                        <i class="fas fa-home"></i> Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+<partial name="_Footer" />
+
+    <script src="@(Url.Content("~/js/script.js"))"></script>
+</body>
+</html>

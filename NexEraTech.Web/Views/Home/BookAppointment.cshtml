@@ -1,0 +1,283 @@
+@model Users
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS44MGQDCK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);} 
+      gtag('js', new Date());
+
+      gtag('config', 'G-LS44MGQDCK');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Free Consultation | NexEra Tech</title>
+    <link rel="icon" type="image/png" href="@(Url.Content("~/Images/favicon.png"))" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="@(Url.Content("~/css/style.css"))" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css" />
+    <style>
+        .form-page { min-height: 100vh; display: flex; flex-direction: column; }
+        .form-container { flex: 1; display: flex; align-items: center; justify-content: center; padding: 60px 24px; }
+        .form-wrapper { width: 100%; max-width: 700px; }
+        .form-header { text-align: center; margin-bottom: 40px; display: flex; flex-direction: column; align-items: center; }
+        .form-header h1 { font-size: 2.2rem; margin: 0 0 12px; line-height: 1.1; max-width: 100%; word-break: break-word; }
+        .form-header p { font-size: 1.05rem; color: var(--text-secondary); margin: 0; max-width: 780px; text-align: center; }
+        .form-group { margin-bottom: 24px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-primary); }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(18, 24, 38, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.2s ease;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 20px rgba(79, 140, 255, 0.2);
+        }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-group-full { grid-column: 1 / -1; }
+        .form-error { color: #ff4fd8; font-size: 0.85rem; margin-top: 4px; }
+        .input-error { border-color: #ff4fd8 !important; }
+        .form-actions { display: flex; gap: 12px; margin-top: 30px; }
+        .btn-submit { flex: 1; }
+        .btn, .btn-submit { cursor: pointer; }
+        .btn-cancel { background: rgba(255, 255, 255, 0.08); border-color: var(--border); }
+        .btn-cancel:hover { background: rgba(255, 255, 255, 0.12); }
+        .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--accent-blue); margin-bottom: 30px; text-decoration: none; transition: color 0.2s ease; }
+        .back-link:hover { color: var(--accent-blue); }
+        .back-link:hover span { text-decoration: underline; }
+        .form-info { background: rgba(79, 140, 255, 0.1); border: 1px solid rgba(79, 140, 255, 0.3); border-radius: 12px; padding: 16px; margin-bottom: 30px; font-size: 0.92rem; }
+        .form-info i { color: var(--accent-blue); margin-right: 8px; }
+        /* Fix autofill styling */
+        .form-group input:-webkit-autofill,
+        .form-group input:-webkit-autofill:hover,
+        .form-group input:-webkit-autofill:focus,
+        .form-group input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px rgba(18, 24, 38, 0.8) inset !important;
+            -webkit-text-fill-color: var(--text-primary) !important;
+        }
+        /* Remove blue autofill background */
+        .form-group input:-webkit-autofill {
+            -webkit-text-fill-color: var(--text-primary);
+            caret-color: var(--text-primary);
+        }
+        @@media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; }
+            .form-header h1 { font-size: 1.6rem; }
+            .form-container { padding: 30px 16px; }
+        }
+        /* Flatpickr styling to match site UI */
+        .flatpickr-input, .flatpickr-alt-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(18, 24, 38, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            box-sizing: border-box;
+        }
+        .flatpickr-calendar {
+            background: rgba(18,24,38,0.98) !important;
+            border: 1px solid var(--border) !important;
+            color: var(--text-primary) !important;
+            border-radius: 10px !important;
+            box-shadow: 0 8px 30px rgba(2,6,23,0.6) !important;
+            z-index: 9999;
+        }
+        .flatpickr-weekdays, .flatpickr-months, .flatpickr-days { color: var(--text-secondary); }
+        .flatpickr-day { color: var(--text-primary); }
+        .flatpickr-day.today { background: rgba(79,140,255,0.14); border-color: rgba(79,140,255,0.28); }
+        .flatpickr-day:hover { background: rgba(79,140,255,0.06); }
+        /* Tweak time input styles to remove bright blue selection and match dark UI */
+        /* Make time controls visually flat and remove bright selection background */
+        .flatpickr-time .numInputWrapper,
+        .flatpickr-time .numInputWrapper input,
+        .flatpickr-time input.flatpickr-hour,
+        .flatpickr-time input.flatpickr-minute,
+        .flatpickr-time input.flatpickr-second,
+        .flatpickr-time .flatpickr-am-pm {
+            background: transparent !important;
+            color: var(--text-primary) !important;
+            border: none !important;
+            border-radius: 4px !important;
+            box-shadow: none !important;
+            outline: none !important;
+        }
+        .flatpickr-time .numInputWrapper input:focus,
+        .flatpickr-time input:focus {
+            background: rgba(255,255,255,0.02) !important;
+            box-shadow: none !important;
+            border-color: transparent !important;
+        }
+        /* Soften selected text highlight */
+        .flatpickr-time input::selection { background: rgba(255,255,255,0.06); color: var(--text-primary); }
+        /* Tone down the up/down arrows */
+        .flatpickr-time .arrowUp, .flatpickr-time .arrowDown {
+            background: transparent !important;
+            color: var(--text-secondary) !important;
+        }
+    </style>
+</head>
+<body id="page-top">
+    <div class="page-glow glow-top"></div>
+    <div class="page-glow glow-bottom"></div>
+
+    <header class="site-header">
+        <div class="container nav-wrap">
+            <a class="logo" href="@Url.Action("Index", "Home")">
+                <img src="@(Url.Content("~/Images/favicon.png"))" alt="NexEra Tech logo" class="main-logo-icon" />
+                <span>NexEra Tech</span>
+            </a>
+            <nav id="main-nav" role="navigation" style="display: none;">
+                <ul>
+                    <li><a href="@Url.Action("Index", "Home")#case-studies">Case Studies</a></li>
+                    <li><a href="@Url.Action("Index", "Home")#skills">Skills</a></li>
+                    <li><a href="@Url.Action("Index", "Home")#why-choose-us">Why Choose Us</a></li>
+                    <li><a href="@Url.Action("Index", "Home")#about-me">About</a></li>
+                </ul>
+            </nav>
+            <a href="@Url.Action("Index", "Home")" class="btn ghost" style="padding: 10px 16px; font-size: 0.9rem;">← Back to Home</a>
+        </div>
+    </header>
+
+    <main class="form-page">
+        <div class="form-container">
+            <div class="form-wrapper">
+                <div class="form-header">
+                    <h1>Book Your Free Consultation</h1>
+                    <p>Tell us about your project and we'll schedule a call with our team</p>
+                </div>
+
+                <div class="form-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Free consultation</strong> — No commitment, just actionable insights for your business.
+                </div>
+
+                <form asp-action="BookAppointment" asp-controller="Home" method="post" id="appointmentForm">
+                    @Html.AntiForgeryToken()
+
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div style="background: rgba(255, 79, 216, 0.15); border: 1px solid rgba(255, 79, 216, 0.3); border-radius: 10px; padding: 12px 16px; margin-bottom: 24px; color: var(--text-primary); font-size: 0.9rem;">
+                            <i class="fas fa-exclamation-circle" style="color: var(--accent-pink); margin-right: 8px;"></i>
+                            @if (ViewData.ModelState.Values.Any(v => v.Errors.Any()))
+                            {
+                                @if (ViewData.ModelState.ContainsKey("") && ViewData.ModelState[""].Errors.Any())
+                                {
+                                    <span>@ViewData.ModelState[""].Errors[0].ErrorMessage</span>
+                                }
+                                else
+                                {
+                                    <span>Please fill the required fields.</span>
+                                }
+                            }
+                        </div>
+                    }
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label asp-for="FirstName"></label>
+                            <input asp-for="FirstName" placeholder="John" />
+                            <span asp-validation-for="FirstName" class="form-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LastName"></label>
+                            <input asp-for="LastName" placeholder="Doe" />
+                            <span asp-validation-for="LastName" class="form-error"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input asp-for="Email" type="email" placeholder="example@company.com" />
+                            <span asp-validation-for="Email" class="form-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PhoneNumber"></label>
+                            <input asp-for="PhoneNumber" type="tel" placeholder="+91 9123456789" />
+                            <span asp-validation-for="PhoneNumber" class="form-error"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group form-group-full">
+                        <label asp-for="CompanyName"></label>
+                        <input asp-for="CompanyName" placeholder="Your Company Name" />
+                        <span asp-validation-for="CompanyName" class="form-error"></span>
+                    </div>
+
+                    <div class="form-group form-group-full">
+                        <label asp-for="AppointmentDate">Consultation Date</label>
+                        <input asp-for="AppointmentDate" class="date-picker" type="text" autocomplete="off" value="@(Model?.AppointmentDate.ToString("yyyy-MM-ddTHH:mm"))" />
+                        <span asp-validation-for="AppointmentDate" class="form-error"></span>
+                    </div>
+
+                    <div class="form-group form-group-full">
+                        <label asp-for="ProjectDescription"></label>
+                        <textarea asp-for="ProjectDescription" placeholder="Tell us about your project, goals, and timeline..."></textarea>
+                        <span asp-validation-for="ProjectDescription" class="form-error"></span>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-submit">
+                            <i class="fas fa-calendar-check"></i> Schedule Consultation
+                        </button>
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-cancel" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+                            Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <partial name="_Footer" />
+
+
+    <script src="@(Url.Content("~/js/script.js"))"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        (function(){
+            // initialize flatpickr on the appointment date input
+            var el = document.querySelector('.date-picker');
+            if (!el) return;
+            var today = new Date();
+            var maxDate = new Date(2099, 11, 31);
+            flatpickr(el, {
+                enableTime: true,
+                time_24hr: false,
+                dateFormat: 'Y-m-d H:i', // value posted to server
+                altInput: true,
+                altFormat: 'd-m-Y h:i K', // user friendly display
+                minDate: 'today',
+                maxDate: '2099-12-31 23:59',
+                allowInput: false,
+                wrap: false,
+                defaultDate: el.value || today,
+                disableMobile: true
+            });
+        })();
+    </script>
+</body>
+</html>

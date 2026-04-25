@@ -1,0 +1,47 @@
+trigger:
+- master  
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- checkout: self
+
+# Install .NET 8 SDK
+- task: UseDotNet@2
+  displayName: 'Install .NET 8 SDK'
+  inputs:
+    packageType: 'sdk'
+    version: '8.0.x'
+
+# Restore dependencies
+- script: dotnet restore NexEraTech.Web/NexEraTech.Web.csproj
+  displayName: 'Restore'
+
+# Build project
+- script: dotnet build NexEraTech.Web/NexEraTech.Web.csproj --configuration Release --no-restore
+  displayName: 'Build'
+
+# Publish application (self-contained Linux executable)
+- script: |
+    dotnet publish NexEraTech.Web/NexEraTech.Web.csproj \
+      -c Release \
+      -r linux-x64 \
+      --self-contained true \
+      /p:PublishSingleFile=true \
+      -o $(Build.ArtifactStagingDirectory)
+  displayName: 'Publish'
+
+# Debug output (IMPORTANT for troubleshooting)
+- script: |
+    echo "Published Output:"
+    ls -la $(Build.ArtifactStagingDirectory)
+  displayName: 'Verify Output'
+
+# Publish artifact for CD pipeline
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'drop'
+    publishLocation: 'Container'

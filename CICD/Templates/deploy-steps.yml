@@ -1,0 +1,42 @@
+steps:
+
+# Stop app and clean directory
+- task: SSH@0
+  displayName: 'Stop Service and Clean Directory'
+  inputs:
+    sshEndpoint: 'oracle-vm-ssh'
+    runOptions: 'commands'
+    commands: |
+      sudo systemctl stop nexeratech || true
+      sudo rm -rf /var/www/nexeratech/*
+
+# Copy published files from CI artifact
+- task: CopyFilesOverSSH@0
+  displayName: 'Copy Files to VM'
+  inputs:
+    sshEndpoint: 'oracle-vm-ssh'
+    sourceFolder: '$(Pipeline.Workspace)/Pipeline/drop'
+    contents: '**'
+    targetFolder: '/var/www/nexeratech'
+
+# Validate deployment (fixed syntax)
+- task: SSH@0
+  displayName: 'Validate Deployment'
+  inputs:
+    sshEndpoint: 'oracle-vm-ssh'
+    runOptions: 'commands'
+    commands: |
+      if [ ! -f /var/www/nexeratech/NexEra ]; then
+        echo "ERROR: Executable not found"
+        exit 1
+      fi
+
+# Start application
+- task: SSH@0
+  displayName: 'Start Application'
+  inputs:
+    sshEndpoint: 'oracle-vm-ssh'
+    runOptions: 'commands'
+    commands: |
+      sudo chmod +x /var/www/nexeratech/NexEra
+      sudo systemctl start nexeratech

@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="NexEraTech.Application/NexEraTech.Application.csproj" />
+  <Project Path="NexEraTech.Domain/NexEraTech.Domain.csproj" />
+  <Project Path="NexEraTech.Infrastructure/NexEraTech.Infrastructure.csproj" />
+  <Project Path="NexEraTech.Web/NexEraTech.Web.csproj" />
+</Solution>

@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS44MGQDCK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);} 
+      if (!window.__nexeraGaConfigured) {
+          gtag('js', new Date());
+          gtag('config', 'G-LS44MGQDCK');
+          window.__nexeraGaConfigured = true;
+      }
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] NexEra Tech</title>
+    <link rel="icon" type="image/svg+xml" href="@(Url.Content("~/Images/nexera-mark.svg"))" />
+    <link rel="alternate icon" href="@(Url.Content("~/Images/nexera-logo.svg"))" />
+    <link rel="shortcut icon" href="@(Url.Content("~/favicon.ico"))" />
+    <meta name="theme-color" content="#071022" />
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/NexEraTech_Portfolio.styles.css" asp-append-version="true" />
+    <style>
+        /* Header/logo tweaks to improve wordmark and icon sizing */
+        .navbar-brand.logo { display: inline-flex; align-items: center; gap: 10px; }
+        .navbar-logo { width: 28px; height: 28px; object-fit: contain; margin-right: 8px; }
+        .navbar-brand.logo span { font-family: 'Poppins', 'Segoe UI', sans-serif; font-weight: 700; font-size: 1.15rem; color: #111; }
+
+        /* Privacy page: larger logo & bolder wordmark for better visual presence */
+        body.privacy-page .navbar-logo,
+        body.privacy-page .main-logo-icon { width: 44px; height: 44px; margin-right: 12px; }
+        body.privacy-page .navbar-brand.logo span { font-size: 1.6rem; font-weight: 800; }
+
+        @@media (max-width: 576px) {
+            body.privacy-page .navbar-logo { width: 36px; height: 36px; }
+            body.privacy-page .navbar-brand.logo span { font-size: 1.1rem; }
+        }
+        .logo-icon { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 8px; padding: 0; box-shadow: 0 6px 18px rgba(2,6,23,0.45); background: transparent; overflow: visible !important; position: relative; z-index: 1302; margin-top: 6px; }
+        /* Ensure logo image is not clipped — force contain and no rounding so full mark shows */
+        .logo-icon img, .main-logo-icon { display: block; width: 36px !important; height: 36px !important; object-fit: contain !important; border-radius: 0 !important; overflow: visible !important; background: transparent !important; vertical-align: middle; margin: 0; }
+        .logo-icon svg { display: block; width: 36px; height: 36px; margin-top: 0; line-height: 1; }
+
+        /* Ensure parent navbar elements don't clip the logo and center content */
+        .navbar, .navbar-brand, .navbar.site-header, .navbar .container-fluid { overflow: visible !important; }
+        .navbar-brand, .navbar { position: relative; z-index: 1301; }
+        .navbar.site-header .container-fluid { display: flex; align-items: center; }
+        .navbar.site-header { min-height: 68px; padding-top: 6px; }
+        .navbar-brand.logo { padding: 0 6px; }
+    </style>
+</head>
+@{
+    var _nexeraPng = Url.Content("~/images/favicon.png");
+    var _nexeraSvg = Url.Content("~/Images/nexera-logo.svg");
+    var _nexeraMark = Url.Content("~/Images/nexera-mark.svg");
+    var isPrivacy = string.Equals(ViewContext.RouteData.Values["action"]?.ToString(), "Privacy", StringComparison.OrdinalIgnoreCase);
+}
+
+<body class="@(isPrivacy ? "privacy-page" : "")">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark site-header box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="logo navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="@_nexeraPng" alt="NexEra Tech logo" class="main-logo-icon" />
+                    <span>NexEra Tech</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/script.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

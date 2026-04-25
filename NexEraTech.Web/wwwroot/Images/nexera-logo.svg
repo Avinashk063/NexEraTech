@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="NexEra Tech logo">
+  <defs>
+    <linearGradient id="lg" x1="0" x2="1">
+      <stop offset="0%" stop-color="#7B61FF"/>
+      <stop offset="100%" stop-color="#F77CF6"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="12" ry="12" fill="url(#lg)" />
+  <g transform="translate(16,16)">
+    <path d="M0 8 C6 -2 18 -2 24 8 C18 18 6 18 0 8 Z" fill="#fff" opacity="0.96"/>
+    <circle cx="34" cy="34" r="6" fill="#fff" opacity="0.92" />
+  </g>
+</svg>

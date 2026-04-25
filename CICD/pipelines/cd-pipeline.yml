@@ -1,0 +1,107 @@
+trigger: none
+
+parameters:
+- name: environment
+  displayName: 'Select Environment'
+  type: string
+  default: 'nonprod'
+  values:
+  - nonprod
+  - prod
+
+resources:
+  pipelines:
+    - pipeline: Pipeline
+      source: NexEraTech.Web-CI
+      trigger: true
+
+stages:
+- stage: Deploy
+  displayName: 'Deploy Stage'
+
+  jobs:
+
+  # =========================
+  # NONPROD → GitHub → Render
+  # =========================
+  - job: NonProdDeploy
+    displayName: 'Deploy to GitHub (NonProd)'
+    condition: eq('${{ parameters.environment }}', 'nonprod')
+
+    pool:
+      vmImage: 'ubuntu-latest'
+
+    steps:
+    - checkout: self
+
+    - script: |
+        git config --global user.email "pipeline@nexeratech.com"
+        git config --global user.name "NexEra Pipeline"
+
+        git clone https://$(GITHUB_TOKEN)@github.com/Avinashk063/NexEraTech.git
+
+        cd NexEraTech
+        git checkout main
+
+        rm -rf *
+
+        cp -r $(Build.SourcesDirectory)/* .
+
+        git add .
+        git commit -m "NonProd Deploy from Azure (source sync)"
+        git push origin main --force
+      env:
+        GITHUB_TOKEN: $(GITHUB_TOKEN)
+      displayName: 'Push Source Code to GitHub'
+
+
+  # =========================
+  # PROD → Oracle VM
+  # =========================
+  - job: ProdDeploy
+    displayName: 'Deploy to Oracle VM'
+    condition: eq('${{ parameters.environment }}', 'prod')
+
+    pool:
+      vmImage: 'ubuntu-latest'
+
+    steps:
+    - checkout: none
+
+    - download: Pipeline
+      artifact: drop
+
+    - task: SSH@0
+      displayName: 'Stop Service'
+      inputs:
+        sshEndpoint: 'oracle-vm-ssh'
+        runOptions: 'commands'
+        commands: |
+          sudo systemctl stop nexeratech || true
+          sudo rm -rf /var/www/nexeratech/*
+
+    - task: CopyFilesOverSSH@0
+      displayName: 'Copy Files'
+      inputs:
+        sshEndpoint: 'oracle-vm-ssh'
+        sourceFolder: '$(Pipeline.Workspace)'
+        contents: '**/drop/**'
+        targetFolder: '/var/www/nexeratech'
+
+    - task: SSH@0
+      displayName: 'Fix Folder'
+      inputs:
+        sshEndpoint: 'oracle-vm-ssh'
+        runOptions: 'commands'
+        commands: |
+          mv /var/www/nexeratech/Pipeline/drop/* /var/www/nexeratech/ 2>/dev/null || true
+          rm -rf /var/www/nexeratech/Pipeline || true
+
+    - task: SSH@0
+      displayName: 'Start App'
+      inputs:
+        sshEndpoint: 'oracle-vm-ssh'
+        runOptions: 'commands'
+        commands: |
+          sudo systemctl daemon-reload
+          sudo systemctl restart nexeratech

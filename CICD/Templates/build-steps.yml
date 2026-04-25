@@ -1,0 +1,41 @@
+steps:
+
+# Install .NET 8 SDK
+- task: UseDotNet@2
+  displayName: 'Install .NET 8 SDK'
+  inputs:
+    packageType: 'sdk'
+    version: '8.0.x'
+
+# Restore dependencies
+- script: |
+    dotnet restore
+  displayName: 'Restore Dependencies'
+
+# Build solution
+- script: |
+    dotnet build --configuration Release --no-restore
+  displayName: 'Build Solution'
+
+# Publish self-contained Linux app (IMPORTANT)
+- script: |
+    dotnet publish NexEraTech.Web.csproj \
+      -c Release \
+      -r linux-x64 \
+      --self-contained true \
+      /p:UseAppHost=true \
+      -o $(Build.ArtifactStagingDirectory)
+  displayName: 'Publish Application'
+
+- script: |
+    echo "Published output:"
+    ls -la $(Build.ArtifactStagingDirectory)
+  displayName: 'Verify Publish Output'
+
+# Publish artifacts for CD pipeline
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Build Artifacts'
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'drop'
+    publishLocation: 'Container'
