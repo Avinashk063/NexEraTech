@@ -1,22 +1,36 @@
-# Multi-stage Dockerfile for ASP.NET Core (.NET 8)
+# -----------------------------
+# BUILD STAGE
+# -----------------------------
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# Copy project file and restore as distinct layer
-COPY ["NexEraTech.Web.csproj", "./"]
-RUN dotnet restore "NexEraTech.Web.csproj"
+# Copy all project files (multi-project fix)
+COPY ["NexEraTech.Web/NexEraTech.Web.csproj", "NexEraTech.Web/"]
+COPY ["NexEraTech.Domain/NexEraTech.Domain.csproj", "NexEraTech.Domain/"]
+COPY ["NexEraTech.Infrastructure/NexEraTech.Infrastructure.csproj", "NexEraTech.Infrastructure/"]
+COPY ["NexEraTech.Application/NexEraTech.Application.csproj", "NexEraTech.Application/"]
 
-# Copy everything else and publish
+# Restore dependencies
+RUN dotnet restore "NexEraTech.Web/NexEraTech.Web.csproj"
+
+# Copy full source
 COPY . .
-RUN dotnet publish "NexEraTech.Web.csproj" -c Release -o /app/publish /p:UseAppHost=false
-FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
+
+# Build & publish
+WORKDIR /src/NexEraTech.Web
+RUN dotnet publish "NexEraTech.Web.csproj" -c Release -o /app/publish
+
+# -----------------------------
+# RUNTIME STAGE
+# -----------------------------
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
+
 COPY --from=build /app/publish .
 
 ENV ASPNETCORE_ENVIRONMENT=Production
 ENV PORT=8080
+
 EXPOSE 8080
 
-# Render provides PORT dynamically; fallback to 8080 for local docker runs
-# Use the actual assembly name produced by the project (AssemblyName in csproj is 'NexEraTech.Web')
-ENTRYPOINT ["sh", "-c", "dotnet NexEraTech.Web.dll --urls http://0.0.0.0:${PORT:-8080}"]
+ENTRYPOINT ["dotnet", "NexEraTech.Web.dll"]
